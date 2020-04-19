@@ -5,7 +5,7 @@ xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 xmlns:local="clr-namespace:CS3280GP.Main"
 mc:Ignorable="d"
-Title="wndMain" Height="497.422" Width="858.52" Closed="OnClose">
+Title="wndMain" Height="497.422" Width="858.52">
     <Grid RenderTransformOrigin="0.503,0.433">
 
         <GroupBox x:Name="Items" Header="Items" HorizontalAlignment="Left" Height="299.663" Margin="23.238,145.534,0,0" VerticalAlignment="Top" Width="798.098"/>
@@ -25,7 +25,7 @@ Title="wndMain" Height="497.422" Width="858.52" Closed="OnClose">
         <Label Content="Price:" HorizontalAlignment="Left" Height="39.784" Margin="88.97,269.637,0,0" VerticalAlignment="Top" Width="57.51" FontSize="18" VerticalContentAlignment="Center"/>
         <TextBox x:Name="Price" HorizontalAlignment="Left" Height="39.784" Margin="151.48,269.637,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218.946" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnlyCaretVisible="True"/>
         <TextBox x:Name="Total_Price" HorizontalAlignment="Left" Height="39.784" Margin="151.48,391.877,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218.946" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnlyCaretVisible="True"/>
-        <TextBox x:Name="Invoice_Number" HorizontalAlignment="Left" Height="32.068" Margin="261.601,65.453,0,0" TextWrapping="Wrap" Text="Invoice Number" VerticalAlignment="Top" Width="150.193"/>
+        <Label x:Name="Invoice_Label" Content="InvoiceId" HorizontalAlignment="Left" Margin="291.949,64.453,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.658,-0.192" Height="33.068" Width="134.881"/>
         <DatePicker x:Name="Invoice_Date" HorizontalAlignment="Left" Height="32.068" Margin="426.83,65.453,0,0" VerticalAlignment="Top" Width="163.453"/>
         <Label Content="Quanitiy:" HorizontalAlignment="Left" Height="39.784" Margin="61.579,329.556,0,0" VerticalAlignment="Top" Width="84.901" FontSize="18" RenderTransformOrigin="0.529,1.967"/>
         <Label Content="Total Price:" HorizontalAlignment="Left" Height="39.784" Margin="50.48,391.877,0,0" VerticalAlignment="Top" Width="122.084" FontSize="18"/>

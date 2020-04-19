@@ -25,10 +25,11 @@ namespace CS3280GP.Main
         Search.wndSearch searchWindow;
         Items.wndItems ItemsWindow;
         clsMainLogic MainLogic;
+        clsSearchSQL clsSql;
         List<clsLineItems> MyList;
         bool editOrAdd;
-        
-        
+        clsSearchLogic clsSL;
+
         public wndMain()
         {
             try
@@ -38,7 +39,7 @@ namespace CS3280GP.Main
                 //searchItems = new Items.wndItems(this);
                 MainLogic = new clsMainLogic();
                 MyList = new List<clsLineItems>();
-                editOrAdd = false;
+                editOrAdd = false;                
 
                 //Items go into combo box
                 Item_List_2.ItemsSource = MainLogic.ListItems();
@@ -46,8 +47,15 @@ namespace CS3280GP.Main
                 //populates data grid
                 Item_Display.ItemsSource = MyList;
 
+                /*
+                clsSql.sInvoiceNum = "";
+                clsSql.sTotalCost = "";
+                clsSql.sInvoiceDate = "";*/
+
                 //initalize window
                 ItemsWindow = new Items.wndItems(this);
+
+                clsSL = new clsSearchLogic();
 
                 Edit_Invoice.IsEnabled = false;
                 Delete_Invoice.IsEnabled = false;
@@ -65,7 +73,16 @@ namespace CS3280GP.Main
         {
             try
             {
-                //need invoice intergration
+                clsSql.sInvoiceNum = 
+                clsSL.sInvoiceDate = DateTime.Now.ToString();
+                MyList.Clear();
+                Item_List_2.SelectedIndex = -1;
+                Quanitiy_Input.Clear();
+
+                UpdateDisplay();
+                editOrAdd = false;
+                Save_Invoice.IsEnabled = true;
+                EnableInputs();
             }
             catch (Exception ex)
             {
@@ -85,11 +102,16 @@ namespace CS3280GP.Main
 
                     if(editOrAdd)
                     {
-                        //needs invoice intergration
+                        Int32.TryParse(clsSql.sInvoiceNum, out int x);
+
+                        MainLogic.UpdateInvoice(x, date, tCost);
+                        MainLogic.UpdateLineItems(x, MyList);
                     }
                     else
                     {
-                        //needs invoice intergration
+                        clsSql.sInvoiceNum = MainLogic.CreateInvoice(date, tCost, MyList).ToString();
+                        Invoice_Label.Content = "Invoice ID: " + clsSql.sInvoiceNum;
+
                     }
                     Edit_Invoice.IsEnabled = true;
                     Delete_Invoice.IsEnabled = true;
@@ -106,11 +128,15 @@ namespace CS3280GP.Main
         {
             try
             {
-                //needs invoice intergration
+                Int32.TryParse(clsSql.sInvoiceNum, out int x);
+
+                MainLogic.DeleteInvoice(x);
 
                 MyList.Clear();
 
-                //needs invoice intergration
+                clsSql.sInvoiceNum = "";
+                clsSql.sTotalCost = "";
+                clsSql.sInvoiceDate = "";
 
                 UpdateDisplay();
             }
@@ -209,7 +235,7 @@ namespace CS3280GP.Main
                     }
                     Quanitiy_Input.Text = "";
 
-                    //need to insert invoiuce date
+                    clsSql.sInvoiceDate = Invoice_Date.Text;
 
                     UpdateDisplay();
                 }
@@ -286,7 +312,16 @@ namespace CS3280GP.Main
 
                 Save_Invoice.IsEnabled = false;
 
-                //will need to pull selected invoice from search window
+                if(clsSql.ReturnSelection() != null)
+                {
+
+                    Int32.TryParse(clsSql.sInvoiceNum, out int x);
+
+                    foreach (var item in MainLogic.GetLineItems(x))
+                    {
+                        MyList.Add(item);
+                    }
+                }
 
                 UpdateDisplay();
             }
