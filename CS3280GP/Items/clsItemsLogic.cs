@@ -1,6 +1,9 @@
-﻿using System;
+﻿using CS3280GP.Main;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +27,7 @@ namespace CS3280GP.Items
                 try 
 	            {	        
 		            Query = new clsItemsSQL();
-                    db = new clsDataAccess;
+                    db = new clsDataAccess();
 	            }
 	            catch (Exception e)
 	            {
@@ -36,11 +39,11 @@ namespace CS3280GP.Items
         /// This will get all the items 
         /// </summary>
         /// <returns></returns>
-        public List<clsItemLines> items()
+        public List<clsLineItems> items()
         {
             try
             {
-                List<clsItemLines> items = new List<clsItemLines>();
+                List<clsLineItems> items = new List<clsLineItems>();
 
                 int rows = 0;
                 DataSet rawdata = db.ExecuteSQLStatement(Query.ItemCodeItemDescripCost(ItemDescIn), ref rows);
@@ -49,7 +52,7 @@ namespace CS3280GP.Items
                 {
                     Double.TryParse(rawdata.Tables[0].Rows[x][2].ToString(), out double total);
 
-                    items.Add(new clsItemLines
+                    items.Add(new clsLineItems
                     {
                         ItemCode = rawdata.Tables[0].Rows[x][0].ToString(),
                         ItemDesc = rawdata.Tables[0].Rows[x][1].ToString(),

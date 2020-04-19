@@ -73,7 +73,6 @@ namespace CS3280GP.Main
         {
             try
             {
-                clsSql.sInvoiceNum = 
                 clsSL.sInvoiceDate = DateTime.Now.ToString();
                 MyList.Clear();
                 Item_List_2.SelectedIndex = -1;
@@ -235,7 +234,7 @@ namespace CS3280GP.Main
                     }
                     Quanitiy_Input.Text = "";
 
-                    clsSql.sInvoiceDate = Invoice_Date.Text;
+                    ///needs implementation
 
                     UpdateDisplay();
                 }
@@ -312,16 +311,7 @@ namespace CS3280GP.Main
 
                 Save_Invoice.IsEnabled = false;
 
-                if(clsSql.ReturnSelection() != null)
-                {
-
-                    Int32.TryParse(clsSql.sInvoiceNum, out int x);
-
-                    foreach (var item in MainLogic.GetLineItems(x))
-                    {
-                        MyList.Add(item);
-                    }
-                }
+                ///needs implemtation
 
                 UpdateDisplay();
             }

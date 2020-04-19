@@ -25,9 +25,9 @@ namespace CS3280GP.Search
         clsSearchLogic clsSL;
         Main.wndMain mainWindow;
 
-        string InvoiceNumSelection = "";
-        string InvoiceDateSelection = "";
-        string InvoiceTotalCost = "";
+        //string InvoiceNumSelection = "";
+        //string InvoiceDateSelection = "";
+        //string InvoiceTotalCost = "";
         public wndSearch(Main.wndMain wndMain)
 
         {
